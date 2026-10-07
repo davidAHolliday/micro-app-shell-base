@@ -26,3 +26,15 @@ export const eventLogs = pgTable('event_logs', {
   payload: jsonb('payload'),
   createdAt: timestamp('created_at').defaultNow(),
 });
+
+//Dedicated table to handle shopify session
+export const shopifySessions = pgTable('shopify_sessions', {
+  id: text('id').primaryKey(), // Shopify Session ID
+  shop: text('shop').notNull(), // e.g., myshop.myshopify.com
+  state: text('state').notNull(),
+  isOnline: boolean('is_online').default(false),
+  scope: text('scope'),
+  accessToken: text('access_token').notNull(),
+  expires: timestamp('expires'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
